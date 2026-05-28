@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+
+# KiCad backups and lock files
+*-backups/
+*.bak
+*.kicad_sch-bak
+*.kicad_pcb-bak
+*.kicad_prl
+fp-info-cache
+_autosave-*
+*.lck
+*.lock
+
+# KiCad fab outputs (regenerated from project)
+gerbers/
+*.gbr
+*.drl
+*.gbrjob
+
+# Editor / IDE
+.vscode/
+.idea/
+.history/
+*.swp
+*~
+
+# Python tooling (kicad-happy etc.)
+__pycache__/
+*.pyc
+.venv/
+
+# Local secrets / scratch
+.env
+.claude/

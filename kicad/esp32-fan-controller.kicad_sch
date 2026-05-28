@@ -1,0 +1,882 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "1544f2c7-0ff6-4515-9a46-13db47bc37e9")
+	(paper "A4")
+	(title_block
+		(title "ESP32 Fan Controller")
+		(date "2026-05-25")
+		(rev "0.1")
+		(comment 1 "4× PWM fan + 4× DS18B20 controller for server airflow")
+	)
+	(lib_symbols)
+	(wire
+		(pts
+			(xy 152.4 95.25) (xy 152.4 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "015d3a72-0de6-44e9-83c0-0b6584881870")
+	)
+	(wire
+		(pts
+			(xy 184.15 82.55) (xy 184.15 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "026f160e-f0dd-4960-bec9-2955fa8a667b")
+	)
+	(wire
+		(pts
+			(xy 72.39 96.52) (xy 72.39 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1584d8dd-f13b-4db2-8627-ca7cd489395e")
+	)
+	(wire
+		(pts
+			(xy 41.91 96.52) (xy 41.91 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2114ec37-0097-475a-a72e-a363fb717838")
+	)
+	(wire
+		(pts
+			(xy 190.5 82.55) (xy 190.5 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "29722e00-942a-4e27-b4c4-2fefcb0169e2")
+	)
+	(wire
+		(pts
+			(xy 173.99 82.55) (xy 173.99 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ac45d5b-7079-4a3a-998c-432a731b985a")
+	)
+	(wire
+		(pts
+			(xy 177.8 82.55) (xy 177.8 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3dab08bb-04d3-4e5d-b101-8a90d2ff27b1")
+	)
+	(wire
+		(pts
+			(xy 180.34 82.55) (xy 180.34 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3f881866-29a1-4b21-a16c-4cab90c1e17b")
+	)
+	(wire
+		(pts
+			(xy 137.16 96.52) (xy 137.16 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "45495b3f-90ad-45a4-8c4b-b1016e5689b0")
+	)
+	(wire
+		(pts
+			(xy 105.41 96.52) (xy 105.41 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c5effc7-3ee2-455f-abea-fbc407291fb1")
+	)
+	(wire
+		(pts
+			(xy 186.69 82.55) (xy 186.69 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80c20850-c260-4720-ab42-be3fa12452d1")
+	)
+	(wire
+		(pts
+			(xy 171.45 82.55) (xy 171.45 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "87f2b5a4-0e04-4ba5-ba6e-fe9c05adcbb3")
+	)
+	(wire
+		(pts
+			(xy 200.66 82.55) (xy 200.66 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a09290a-b694-4c6e-92ff-a6e3b609edd3")
+	)
+	(wire
+		(pts
+			(xy 109.22 96.52) (xy 109.22 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a97fecac-b841-4d1a-9cbd-a5bc4ad51702")
+	)
+	(wire
+		(pts
+			(xy 76.2 96.52) (xy 76.2 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b41adeab-9920-409f-b110-bf0dfdad73a0")
+	)
+	(wire
+		(pts
+			(xy 45.72 96.52) (xy 45.72 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d7006fb8-a5b9-4f4b-807b-79d288621742")
+	)
+	(wire
+		(pts
+			(xy 140.97 96.52) (xy 140.97 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8bcd79e-32ce-49f4-9457-39e9fa25caf3")
+	)
+	(wire
+		(pts
+			(xy 193.04 82.55) (xy 193.04 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc4e7bf2-e123-4832-8af5-f409b5db2cd1")
+	)
+	(label "PWM4"
+		(at 193.04 82.55 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "055adf09-727e-4304-8104-14c43235dd13")
+	)
+	(label "PWM3"
+		(at 186.69 82.55 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "061d9395-ea72-4a60-aab5-07822a5e9569")
+	)
+	(label "PWM4"
+		(at 140.97 96.52 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "16303452-86b7-430e-810a-18d12d6a4829")
+	)
+	(label "TACH3"
+		(at 105.41 96.52 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1bd0245b-cc87-40b8-bdca-947c5f6762bd")
+	)
+	(label "TACH3"
+		(at 184.15 82.55 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2a976a4a-427e-424e-bb0b-b74b87035448")
+	)
+	(label "ONE_WIRE"
+		(at 200.66 82.55 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "43c209f0-d786-4f10-916f-eb35b40b2572")
+	)
+	(label "PWM1"
+		(at 173.99 82.55 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5c1881f4-1791-44c9-bdd4-f7c89e584d9b")
+	)
+	(label "PWM3"
+		(at 109.22 96.52 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6c71b12f-d799-4490-9fc9-b69c8502f230")
+	)
+	(label "PWM2"
+		(at 76.2 96.52 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "708ab8f4-3018-48cb-a061-ae76479c26c9")
+	)
+	(label "TACH4"
+		(at 190.5 82.55 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "826f8b06-1786-4c3b-ba8e-1d0d431b869e")
+	)
+	(label "TACH1"
+		(at 171.45 82.55 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "84c502ac-794d-4dbb-8fec-282dc82be9be")
+	)
+	(label "TACH1"
+		(at 41.91 96.52 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8e4f675e-15ae-4fe4-9cc6-152d5e9e252c")
+	)
+	(label "TACH2"
+		(at 72.39 96.52 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "adcd5edc-b68e-4371-b03c-6596651c4995")
+	)
+	(label "ONE_WIRE"
+		(at 152.4 95.25 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b1b6fafe-cd72-4d96-bac3-4a896dff204a")
+	)
+	(label "TACH4"
+		(at 137.16 96.52 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b4b8829a-bd08-44c7-bf97-6e9634ee7f05")
+	)
+	(label "TACH2"
+		(at 177.8 82.55 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b846566a-bcf0-4eed-969a-df83fd309a76")
+	)
+	(label "PWM1"
+		(at 45.72 96.52 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bdc1117a-66e2-4f1d-9a75-192d7c967741")
+	)
+	(label "PWM2"
+		(at 180.34 82.55 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e1ef4894-811f-40c9-96bc-fb109af3acd0")
+	)
+	(sheet
+		(at 86.36 97.79)
+		(size 25.4 63.5)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "0a421334-c859-40c8-ab9c-6078c5af3ad3")
+		(property "Sheetname" "Fan3"
+			(at 85.6484 161.29 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "fan.kicad_sch"
+			(at 112.3446 161.29 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "PWM" input
+			(at 109.22 97.79 90)
+			(uuid "0ff7d59d-f23f-44a0-a5ed-0ee19a964add")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "TACH" output
+			(at 105.41 97.79 90)
+			(uuid "6ae1e37a-e1aa-4e86-a86f-c0d1e066c285")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "esp32-fan-controller"
+				(path "/1544f2c7-0ff6-4515-9a46-13db47bc37e9"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 54.61 97.79)
+		(size 25.4 63.5)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "3fbbed97-aa78-4b09-a664-b19d1a9b151c")
+		(property "Sheetname" "Fan2"
+			(at 53.8984 161.29 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "fan.kicad_sch"
+			(at 80.5946 161.29 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "PWM" input
+			(at 76.2 97.79 90)
+			(uuid "ea273fa8-5115-4d41-bd26-5cf921532edd")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "TACH" output
+			(at 72.39 97.79 90)
+			(uuid "1a935bef-82e3-4ce5-bf63-caaae90e3224")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "esp32-fan-controller"
+				(path "/1544f2c7-0ff6-4515-9a46-13db47bc37e9"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 149.86 15.24)
+		(size 132.08 64.77)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "8b0ca3b8-9346-4467-a005-6e9bd90c6f6f")
+		(property "Sheetname" "MCU"
+			(at 149.86 14.5284 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "mcu.kicad_sch"
+			(at 149.86 80.5946 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "PWM3" output
+			(at 186.69 80.01 270)
+			(uuid "a53aeb4a-9984-4f14-9bfd-b577e041fa44")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PWM4" output
+			(at 193.04 80.01 270)
+			(uuid "02f1998f-b0bf-4297-abec-cfc8f8e427a2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "TACH3" input
+			(at 184.15 80.01 270)
+			(uuid "8eaa3935-2c4c-4d5d-90aa-31555277e328")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "TACH4" input
+			(at 190.5 80.01 270)
+			(uuid "bdde207f-e3ec-41bd-b413-2b7ce1f1e88e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "TACH2" input
+			(at 177.8 80.01 270)
+			(uuid "b5a81c8e-f8f2-4825-a7f4-01bcf016435c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "TACH1" input
+			(at 171.45 80.01 270)
+			(uuid "e7c751b4-4ff8-42be-aa12-dd22ef6ed65f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PWM2" output
+			(at 180.34 80.01 270)
+			(uuid "85b47739-ba9e-4bc4-8c8e-766591bf837f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PWM1" output
+			(at 173.99 80.01 270)
+			(uuid "1624b1d5-eeab-49cf-b16c-da0e532d9afb")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ONE_WIRE" bidirectional
+			(at 200.66 80.01 270)
+			(uuid "acf45859-757f-4df6-a1b2-a17dfc903609")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "esp32-fan-controller"
+				(path "/1544f2c7-0ff6-4515-9a46-13db47bc37e9"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 22.86 97.79)
+		(size 25.4 63.5)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "d113f466-9fb5-4e19-be0e-31719fd287ca")
+		(property "Sheetname" "Fan1"
+			(at 22.1484 161.29 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "fan.kicad_sch"
+			(at 48.8446 161.29 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "PWM" input
+			(at 45.72 97.79 90)
+			(uuid "12a6da54-6c4f-41df-bc3c-7ee48265f70d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "TACH" output
+			(at 41.91 97.79 90)
+			(uuid "ed99c0e1-df15-42f4-aed5-6b34997c3766")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "esp32-fan-controller"
+				(path "/1544f2c7-0ff6-4515-9a46-13db47bc37e9"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 116.84 97.79)
+		(size 25.4 63.5)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "d49f8517-37ba-4f8c-8461-ef83c11a667c")
+		(property "Sheetname" "Fan4"
+			(at 116.1284 161.29 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "fan.kicad_sch"
+			(at 142.8246 161.29 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "PWM" input
+			(at 140.97 97.79 90)
+			(uuid "ee94c64f-93e5-4c52-a219-02cb546d056e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "TACH" output
+			(at 137.16 97.79 90)
+			(uuid "ca497118-6972-4a01-81ae-e51dd30b2b2a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "esp32-fan-controller"
+				(path "/1544f2c7-0ff6-4515-9a46-13db47bc37e9"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 149.86 97.79)
+		(size 132.08 63.5)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "ef2ea90c-a925-4d63-9649-31b7e8d0a8a2")
+		(property "Sheetname" "Sensors"
+			(at 149.1484 161.29 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sensors.kicad_sch"
+			(at 282.5246 161.29 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "ONE_WIRE" bidirectional
+			(at 152.4 97.79 90)
+			(uuid "35a7f39d-f1f8-4d7e-aa0c-679b5d16eac1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "esp32-fan-controller"
+				(path "/1544f2c7-0ff6-4515-9a46-13db47bc37e9"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 15.24 15.24)
+		(size 132.08 69.85)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "f073e9ba-f4e8-4328-85bc-db4c01234e9a")
+		(property "Sheetname" "Power"
+			(at 15.24 14.5284 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "power.kicad_sch"
+			(at 15.24 85.6746 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "esp32-fan-controller"
+				(path "/1544f2c7-0ff6-4515-9a46-13db47bc37e9"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

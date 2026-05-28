@@ -1,0 +1,20 @@
+Reference,Qty,Value,Footprint,MPN,Manufacturer,element14,E14_Stock,Chosen_Distributor,Datasheet,Validated,DNP,Notes
+"C2(x4),C7",5,100nF,Disc_D5.0mm_W2.5mm_P5.00mm,K104K15X7RF5UH5,Vishay,2507750,,element14,,,,4x fan instances + 1 ESP32
+C6,1,10µF,Disc_D7.5mm_W4.4mm_P5.00mm,TAP106K016SCS,Kyocera AVX,2579016,,,,,,
+"C8,C1",2,100µF / 25V,CP_Radial_D8.0mm_P3.50mm,MCGPR25V107M6.3X11,Multicomp Pro,9451188,,element14,,,,
+C9,1,10 µF / 16V,CP_Radial_D8.0mm_P3.50mm,ECA1CHG100,Panasonic,1907193,,,,,,
+D1,1,1.5KE15A,DO-15_P10.16mm_Horizontal,1.5KE15A,Littelfuse,2765092,,element14,,,,
+D2,1,GREEN,LED_D3.0mm,L-934LGD,Kingbright,1142509,,element14,,,,
+D3,1,YELLOW,LED_D3.0mm,TLLY4400,Vishay,1612439,,element14,,,,
+F1-F4,4,0.5A,Fuse_Bourns_MF-RG300,MF-R050,Bourns,9350420,,element14,,,,4x fan instances
+J1,1,12V_IN,"TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",1715721,Phoenix Contact,3041529,,,,,,
+J3-J6,4,FAN,PinHeader_1x04_P2.54mm_Vertical,61300411121,Wurth Elektronik,2356155,,element14,,,,4x fan headers
+J7,1,I2C,PinHeader_1x04_P2.54mm_Vertical,61300411121,Wurth Elektronik,2356155,,,,,,
+"J10,J9,J8,J11",4,"MKDS 1,5/3-5,08","TerminalBlock_Phoenix_MKDS-1,5-3-5.08_1x03_P5.08mm_Horizontal",1715734,Phoenix Contact,3041530,,,,,,
+M1,1,MP1584EN,PinHeader_1x04_P2.54mm_Vertical,61300411121,Wurth Elektronik,2356155,,,,,,
+R1,1,1k,Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,CFR25J1K0,TE Connectivity,2329626,,,,,,
+R2-R5,4,10k,Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,CFR25J10K,TE Connectivity,2329609,,element14,,,,4x tach pull-ups
+R6,1,470,Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,CFR25J470R,TE Connectivity,2329680,,,,,,
+"R7,R8,R9",3,4k7,Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,CFR25J4K7,TE Connectivity,2329685,,,,,,
+SW1,1,BOOT_USER,SW_PUSH_6mm,B3F-1000,Omron,176432,,,,,,
+U1,1,ESP32-DevKitC,ESP32-DevKitC,,,,,,https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/hw-reference/esp32/get-started-devkitc.html,,,

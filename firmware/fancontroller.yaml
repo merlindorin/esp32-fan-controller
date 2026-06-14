@@ -1,0 +1,290 @@
+esphome:
+  name: fancontroller
+  friendly_name: Fan Controller
+  on_boot:
+    priority: -100
+    then:
+      - script.execute: sync_status
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "Fan Controller Fallback"
+    password: !secret fallback_password
+
+captive_portal:
+
+# All DS18B20 probes share GPIO23 (J8..J11 wired to the same 1-Wire bus).
+one_wire:
+  - platform: gpio
+    pin: GPIO23
+
+# ===== Outputs =====
+output:
+  # Yellow LED D3 on GPIO2 — purely an auto/manual status indicator now.
+  - platform: gpio
+    id: status_led_out
+    pin: GPIO2
+  # PWM outputs (25 kHz, Noctua spec)
+  - platform: ledc
+    id: fan_right_1_pwm
+    pin: GPIO32
+    frequency: 25000Hz
+  - platform: ledc
+    id: fan_right_2_pwm
+    pin: GPIO33
+    frequency: 25000Hz
+  - platform: ledc
+    id: fan_left_1_pwm
+    pin: GPIO25
+    frequency: 25000Hz
+  - platform: ledc
+    id: fan_left_2_pwm
+    pin: GPIO26
+    frequency: 25000Hz
+
+# SW1 (BOOT_USER) on GPIO0, press-to-ground momentary.
+# WARNING: GPIO0 is a strapping pin. Don't hold it at boot/reset (forces download mode).
+binary_sensor:
+  - platform: gpio
+    name: "User Button"
+    id: user_button
+    pin:
+      number: GPIO0
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    on_click:
+      # Short press: toggle Auto/Manual
+      - min_length: 50ms
+        max_length: 800ms
+        then:
+          - switch.toggle: cooling_auto
+      # Long hold: reboot
+      - min_length: 3s
+        max_length: 10s
+        then:
+          - button.press: restart_button
+
+button:
+  - platform: restart
+    name: "Restart"
+    id: restart_button
+
+# ===== Fans =====
+# RIGHT cabinet: J3 (fan_right_1) and J4 (fan_right_2).
+# LEFT  cabinet: J5 (fan_left_1)  and J6 (fan_left_2).
+fan:
+  - platform: speed
+    output: fan_right_1_pwm
+    name: "Right Fan 1"
+    id: fan_right_1
+  - platform: speed
+    output: fan_right_2_pwm
+    name: "Right Fan 2"
+    id: fan_right_2
+  - platform: speed
+    output: fan_left_1_pwm
+    name: "Left Fan 1"
+    id: fan_left_1
+  - platform: speed
+    output: fan_left_2_pwm
+    name: "Left Fan 2"
+    id: fan_left_2
+
+sensor:
+  # ===== Tachometers (Noctua = 2 pulses/rev → multiply 0.5) =====
+  - platform: pulse_counter
+    pin: { number: GPIO35, mode: { input: true } }
+    name: "Right Fan 1 RPM"
+    unit_of_measurement: "RPM"
+    accuracy_decimals: 0
+    update_interval: 5s
+    filters: [multiply: 0.5]
+  - platform: pulse_counter
+    pin: { number: GPIO34, mode: { input: true } }
+    name: "Right Fan 2 RPM"
+    unit_of_measurement: "RPM"
+    accuracy_decimals: 0
+    update_interval: 5s
+    filters: [multiply: 0.5]
+  - platform: pulse_counter
+    pin: { number: GPIO39, mode: { input: true } }
+    name: "Left Fan 1 RPM"
+    unit_of_measurement: "RPM"
+    accuracy_decimals: 0
+    update_interval: 5s
+    filters: [multiply: 0.5]
+  - platform: pulse_counter
+    pin: { number: GPIO36, mode: { input: true } }
+    name: "Left Fan 2 RPM"
+    unit_of_measurement: "RPM"
+    accuracy_decimals: 0
+    update_interval: 5s
+    filters: [multiply: 0.5]
+
+  # ===== Temperature probes =====
+  - platform: dallas_temp
+    name: "Left Temp"
+    id: temp_left
+    address: 0x72000000be310828
+    update_interval: 10s
+    on_value:
+      then:
+        - script.execute: update_left_cooling
+  - platform: dallas_temp
+    name: "Right Temp"
+    id: temp_right
+    address: 0x27000000bf5ac728
+    update_interval: 10s
+    on_value:
+      then:
+        - script.execute: update_right_cooling
+
+# ===== Thermostatic control =====
+# Left and right cabinet share one set of bounds.
+# Linear ramp: off below low, full above high, 60 % at setpoint
+# (setpoint sits inside the band so equilibrium parks fans at ~60 % instead of oscillating).
+number:
+  - platform: template
+    name: "Cooling Setpoint"
+    id: cooling_setpoint
+    icon: mdi:thermometer
+    unit_of_measurement: "°C"
+    min_value: 15.0
+    max_value: 50.0
+    step: 0.5
+    initial_value: 27.0
+    restore_value: true
+    optimistic: true
+    mode: box
+  - platform: template
+    name: "Fans Off Below"
+    id: cooling_low
+    icon: mdi:fan-off
+    unit_of_measurement: "°C"
+    min_value: 10.0
+    max_value: 45.0
+    step: 0.5
+    initial_value: 24.0
+    restore_value: true
+    optimistic: true
+    mode: box
+  - platform: template
+    name: "Fans Full Above"
+    id: cooling_high
+    icon: mdi:fan
+    unit_of_measurement: "°C"
+    min_value: 15.0
+    max_value: 60.0
+    step: 0.5
+    initial_value: 30.0
+    restore_value: true
+    optimistic: true
+    mode: box
+
+switch:
+  - platform: template
+    name: "Auto Cooling"
+    id: cooling_auto
+    icon: mdi:fan-auto
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_ON
+    turn_on_action:
+      - output.turn_on: status_led_out
+      - script.execute: update_left_cooling
+      - script.execute: update_right_cooling
+    turn_off_action:
+      - output.turn_off: status_led_out
+      - fan.turn_off: fan_left_1
+      - fan.turn_off: fan_left_2
+      - fan.turn_off: fan_right_1
+      - fan.turn_off: fan_right_2
+
+script:
+  # Align LED + cooling state to the restored auto switch on boot.
+  - id: sync_status
+    then:
+      - lambda: |-
+          if (id(cooling_auto).state) {
+            id(status_led_out).turn_on();
+          } else {
+            id(status_led_out).turn_off();
+          }
+      - if:
+          condition:
+            switch.is_on: cooling_auto
+          then:
+            - script.execute: update_left_cooling
+            - script.execute: update_right_cooling
+
+  - id: update_left_cooling
+    then:
+      - lambda: |-
+          if (!id(cooling_auto).state) return;
+          if (isnan(id(temp_left).state)) return;
+          float t  = id(temp_left).state;
+          float lo = id(cooling_low).state;
+          float sp = id(cooling_setpoint).state;
+          float hi = id(cooling_high).state;
+          if (lo >= sp || sp >= hi) {
+            ESP_LOGW("cool-L", "Bad bounds: low=%.1f sp=%.1f high=%.1f", lo, sp, hi);
+            return;
+          }
+          int speed;
+          if (t <= lo)      speed = 0;
+          else if (t < sp)  speed = (int)((t - lo) / (sp - lo) * 60.0f);
+          else if (t < hi)  speed = 60 + (int)((t - sp) / (hi - sp) * 40.0f);
+          else              speed = 100;
+          ESP_LOGI("cool-L", "T=%.2f°C → left fans = %d%%", t, speed);
+          if (speed == 0) {
+            id(fan_left_1).turn_off().perform();
+            id(fan_left_2).turn_off().perform();
+          } else {
+            auto a = id(fan_left_1).turn_on(); a.set_speed(speed); a.perform();
+            auto b = id(fan_left_2).turn_on(); b.set_speed(speed); b.perform();
+          }
+
+  - id: update_right_cooling
+    then:
+      - lambda: |-
+          if (!id(cooling_auto).state) return;
+          if (isnan(id(temp_right).state)) return;
+          float t  = id(temp_right).state;
+          float lo = id(cooling_low).state;
+          float sp = id(cooling_setpoint).state;
+          float hi = id(cooling_high).state;
+          if (lo >= sp || sp >= hi) {
+            ESP_LOGW("cool-R", "Bad bounds: low=%.1f sp=%.1f high=%.1f", lo, sp, hi);
+            return;
+          }
+          int speed;
+          if (t <= lo)      speed = 0;
+          else if (t < sp)  speed = (int)((t - lo) / (sp - lo) * 60.0f);
+          else if (t < hi)  speed = 60 + (int)((t - sp) / (hi - sp) * 40.0f);
+          else              speed = 100;
+          ESP_LOGI("cool-R", "T=%.2f°C → right fans = %d%%", t, speed);
+          if (speed == 0) {
+            id(fan_right_1).turn_off().perform();
+            id(fan_right_2).turn_off().perform();
+          } else {
+            auto a = id(fan_right_1).turn_on(); a.set_speed(speed); a.perform();
+            auto b = id(fan_right_2).turn_on(); b.set_speed(speed); b.perform();
+          }

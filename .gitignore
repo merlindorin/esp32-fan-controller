@@ -33,3 +33,7 @@ __pycache__/
 # Local secrets / scratch
 .env
 .claude/
+
+# ESPHome
+firmware/.esphome/
+firmware/secrets.yaml

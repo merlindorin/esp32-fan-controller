@@ -129,7 +129,7 @@ The probe on J8 covers the left fans (J5 + J6), the probe on J9 covers the right
 
 The shipped firmware is [`firmware/fancontroller.yaml`](firmware/fancontroller.yaml). It exposes, in Home Assistant:
 
-- Four fans (`Left Fan 1/2`, `Right Fan 1/2`) with PWM + RPM
+- Two fan controls (`Left Fans`, `Right Fans`), each driving that side's two fans in lockstep, plus an individual RPM sensor per physical fan (four in total, so a single seized fan is still visible)
 - Two temperature probes (`Left Temp`, `Right Temp`) with their DS18B20 ROM addresses pinned
 - A single `Auto Cooling` switch and three `Number` entities (`Cooling Setpoint`, `Fans Off Below`, `Fans Full Above`)
 - A `Restart` button and a `User Button` binary sensor for the on-board SW1
@@ -150,14 +150,14 @@ The on-board button toggles `Auto Cooling` on a short press, and reboots the ESP
 <table align="center">
   <tr>
     <td align="center" width="50%">
-      <a href="docs/images/ha-controls.jpg"><img src="docs/images/ha-controls.jpg" alt="Home Assistant device controls: Auto Cooling switch, three setpoint numbers, four fan toggles, click for full size" width="320"></a>
+      <a href="docs/images/ha-controls.jpg"><img src="docs/images/ha-controls.jpg" alt="Home Assistant device controls: Auto Cooling switch, three setpoint numbers, two fan toggles, click for full size" width="320"></a>
     </td>
     <td align="center" width="50%">
       <a href="docs/images/ha-sensors.jpg"><img src="docs/images/ha-sensors.jpg" alt="Home Assistant sensors page: left and right RPM and temperatures, click for full size" width="320"></a>
     </td>
   </tr>
   <tr>
-    <td align="center"><sub>Device controls: auto cooling, thresholds, individual fan toggles.</sub></td>
+    <td align="center"><sub>Device controls: auto cooling, thresholds, per-side fan toggles.</sub></td>
     <td align="center"><sub>Sensors: per-side RPM and temperature.</sub></td>
   </tr>
 </table>
@@ -286,7 +286,7 @@ The PCB in this repository is the consolidation of both stages: 4 probes (intake
 - ✅ Components ordered (Farnell)
 - ✅ Board assembled and brought up on the bench
 - ✅ Mounted in the cabinet, three fans and two DS18B20s live
-- ✅ ESPHome config shipped: 4 fans, 2 temp probes, thermostatic auto-cooling, button + LED status
+- ✅ ESPHome config shipped: two per-side fan groups (4 PWM channels, 4 RPM sensors), 2 temp probes, thermostatic auto-cooling, button + LED status
 
 ## License
 

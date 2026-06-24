@@ -41,7 +41,8 @@ output:
   - platform: gpio
     id: status_led_out
     pin: GPIO2
-  # PWM outputs (25 kHz, Noctua spec)
+  # PWM outputs (25 kHz, Noctua spec). Each cabinet's two fans share one logical
+  # channel: a template output fans the level out to both LEDC pins in lockstep.
   - platform: ledc
     id: fan_right_1_pwm
     pin: GPIO32
@@ -58,6 +59,18 @@ output:
     id: fan_left_2_pwm
     pin: GPIO26
     frequency: 25000Hz
+  - platform: template
+    type: float
+    id: fan_right_pwm
+    write_action:
+      - output.set_level: { id: fan_right_1_pwm, level: !lambda return state; }
+      - output.set_level: { id: fan_right_2_pwm, level: !lambda return state; }
+  - platform: template
+    type: float
+    id: fan_left_pwm
+    write_action:
+      - output.set_level: { id: fan_left_1_pwm, level: !lambda return state; }
+      - output.set_level: { id: fan_left_2_pwm, level: !lambda return state; }
 
 # SW1 (BOOT_USER) on GPIO0, press-to-ground momentary.
 # WARNING: GPIO0 is a strapping pin. Don't hold it at boot/reset (forces download mode).
@@ -89,25 +102,17 @@ button:
     id: restart_button
 
 # ===== Fans =====
-# RIGHT cabinet: J3 (fan_right_1) and J4 (fan_right_2).
-# LEFT  cabinet: J5 (fan_left_1)  and J6 (fan_left_2).
+# One entity per cabinet, each driving both physical fans in lockstep.
+# RIGHT cabinet: J3 + J4.  LEFT cabinet: J5 + J6.
 fan:
   - platform: speed
-    output: fan_right_1_pwm
-    name: "Right Fan 1"
-    id: fan_right_1
+    output: fan_right_pwm
+    name: "Right Fans"
+    id: fan_right
   - platform: speed
-    output: fan_right_2_pwm
-    name: "Right Fan 2"
-    id: fan_right_2
-  - platform: speed
-    output: fan_left_1_pwm
-    name: "Left Fan 1"
-    id: fan_left_1
-  - platform: speed
-    output: fan_left_2_pwm
-    name: "Left Fan 2"
-    id: fan_left_2
+    output: fan_left_pwm
+    name: "Left Fans"
+    id: fan_left
 
 sensor:
   # ===== Tachometers (Noctua = 2 pulses/rev → multiply 0.5) =====
@@ -213,10 +218,8 @@ switch:
       - script.execute: update_right_cooling
     turn_off_action:
       - output.turn_off: status_led_out
-      - fan.turn_off: fan_left_1
-      - fan.turn_off: fan_left_2
-      - fan.turn_off: fan_right_1
-      - fan.turn_off: fan_right_2
+      - fan.turn_off: fan_left
+      - fan.turn_off: fan_right
 
 script:
   # Align LED + cooling state to the restored auto switch on boot.
@@ -255,11 +258,9 @@ script:
           else              speed = 100;
           ESP_LOGI("cool-L", "T=%.2f°C → left fans = %d%%", t, speed);
           if (speed == 0) {
-            id(fan_left_1).turn_off().perform();
-            id(fan_left_2).turn_off().perform();
+            id(fan_left).turn_off().perform();
           } else {
-            auto a = id(fan_left_1).turn_on(); a.set_speed(speed); a.perform();
-            auto b = id(fan_left_2).turn_on(); b.set_speed(speed); b.perform();
+            auto a = id(fan_left).turn_on(); a.set_speed(speed); a.perform();
           }
 
   - id: update_right_cooling
@@ -282,9 +283,7 @@ script:
           else              speed = 100;
           ESP_LOGI("cool-R", "T=%.2f°C → right fans = %d%%", t, speed);
           if (speed == 0) {
-            id(fan_right_1).turn_off().perform();
-            id(fan_right_2).turn_off().perform();
+            id(fan_right).turn_off().perform();
           } else {
-            auto a = id(fan_right_1).turn_on(); a.set_speed(speed); a.perform();
-            auto b = id(fan_right_2).turn_on(); b.set_speed(speed); b.perform();
+            auto a = id(fan_right).turn_on(); a.set_speed(speed); a.perform();
           }

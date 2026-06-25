@@ -63,6 +63,7 @@ The board is now soldered, mounted at the back of the cabinet, and the firmware 
 - [Build one yourself](#build-one-yourself)
 - [Repository layout](#repository-layout)
 - [Roadmap](#roadmap)
+- [Discussion](#discussion)
 - [License](#license)
 - [Thanks](#thanks)
 
@@ -146,6 +147,14 @@ T ≥ Full Above           → 100 %     (max effort)
 The setpoint sits inside the band on purpose, so a stable cabinet parks the fans at around 60 % instead of oscillating between full speed and off. All three thresholds are editable live from HA; defaults are 24 / 27 / 30 °C.
 
 The on-board button toggles `Auto Cooling` on a short press, and reboots the ESP32 on a 3 s+ hold. The yellow LED follows `Auto Cooling`: on in auto, off in manual.
+
+### Autonomous by design
+
+The control loop runs entirely on the board, not in Home Assistant. That is deliberate. Each server already manages its own temperature through its own fans; this controller's job is to keep the enclosure itself in range, and it has to keep doing that even when nothing is around to tell it to.
+
+Home Assistant here runs on one of my Kubernetes nodes, which lives in the very rack this board is cooling. Relying on it to cool the rack it runs in is a chicken-and-egg problem: if that node is the one overheating, HA could be the first thing to go down. So the thermostatic logic lives on the ESP32 itself. If HA is unreachable, the board keeps reading its probes and driving the fans on its own, the servers keep handling their own thermal management, and everything stays under control independently.
+
+The result is layered, autonomous cooling instead of a central brain that could take itself down and put the other nodes at thermal risk. Home Assistant is for visibility and live tuning, not a dependency for the rack to stay cool.
 
 <table align="center">
   <tr>
@@ -287,6 +296,13 @@ The PCB in this repository is the consolidation of both stages: 4 probes (intake
 - ✅ Board assembled and brought up on the bench
 - ✅ Mounted in the cabinet, three fans and two DS18B20s live
 - ✅ ESPHome config shipped: two per-side fan groups (4 PWM channels, 4 RPM sensors), 2 temp probes, thermostatic auto-cooling, button + LED status
+
+## Discussion
+
+Shared and discussed here:
+
+- [r/esp32](https://www.reddit.com/r/esp32/comments/1ueic1q/esp32_fan_controller_for_my_home_server_cabinet/)
+- [r/homeassistant](https://www.reddit.com/r/homeassistant/comments/1ueijpl/esphome_fan_controller_for_my_server_cabinet/)
 
 ## License
 
